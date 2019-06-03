@@ -2083,7 +2083,7 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
 	if (vm_support)
 		irqflags = IRQF_TRIGGER_RISING;
 	else
-		irqflags = IRQF_NO_SUSPEND | IRQF_SHARED;
+		irqflags = IRQF_SHARED;
 
 	ret = devm_request_irq(dev, irq,
 			       qcom_glink_native_intr,
@@ -2095,6 +2095,9 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
 	}
 
 	glink->irq = irq;
+	ret = enable_irq_wake(glink->irq);
+	if (ret)
+		dev_err(dev, "failed to set irq wake\n");
 
 	size = of_property_count_u32_elems(dev->of_node, "cpu-affinity");
 	if (size > 0) {
