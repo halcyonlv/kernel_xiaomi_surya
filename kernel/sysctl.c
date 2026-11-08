@@ -606,7 +606,6 @@ static struct ctl_table kern_table[] = {
 		.mode		= 0644,
 		.proc_handler	= sched_updown_migrate_handler,
 	},
-<<<<<<< HEAD
 	{
 		.procname       = "sched_energy_aware",
 		.data           = &sysctl_sched_energy_aware,
@@ -616,9 +615,6 @@ static struct ctl_table kern_table[] = {
 		.extra1         = &zero,
 		.extra2         = &one,
 	},
-#ifdef CONFIG_SCHED_DEBUG
-=======
->>>>>>> b7f77b1b626f (BACKPORT: sched: promote nodes out of CONFIG_SCHED_DEBUG)
 	{
 		.procname	= "sched_min_granularity_ns",
 		.data		= &sysctl_sched_min_granularity,
